@@ -17,7 +17,11 @@
   },
   "homepage": "https://github.com/MrGrife/Website_BeOnePage#readme",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.1",
     "animate.css": "^4.1.1",
+    "bootstrap": "^4.5.3",
+    "jquery": "^3.5.1",
+    "jquery-parallax.js": "^1.5.0",
     "wowjs": "^1.1.3"
   }
 }
