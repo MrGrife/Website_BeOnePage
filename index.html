@@ -5,17 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>BeOnePage</title>
     <link rel="stylesheet" href="css/style.css">
-
-    <!-- Fonts -->
-    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.css">
-
-    <!-- Animate css -->
-    <link rel="stylesheet" href="node_modules/animate.css/animate.min.css">
 </head>
 <body>
 
-
   <header>
+    <div class="progress__bar"></div>
     <div class="header__content">
       <h1 class="logo"><a href="#">BeOnePage</a></h1>
       <nav>
@@ -45,24 +39,74 @@
       <div class="burger__menu"><span></span></div>
     </div>
   </header>
-  <div class="container"></div>
 
+  <div class="slider swiper-container">
+    <div class="slide__wrap swiper-wrapper">
+      <div class="slider__item swiper-slide">
+        <div class="parallax-img">
+          <img src="https://beonepage.betheme.me/wp-content/uploads/2015/11/slide-1.jpg" alt="">
+        </div>
+        <div class="slider__text">
+          <h1 class="fadeInDown">BE <span>IMAGINATIVE</span> • BE <span>YOURSELF</span></h1>
+          <p class="flipInX">We handcraft well-thought-out WordPress themes</p>
+          <div class="slider__button fadeInUp">
+            <a href="#">BUY NOW</a>
+          </div>
+        </div>
+      </div>
+      <div class="slider__item swiper-slide">
+        <div class="parallax-img">
+          <img src="https://beonepage.betheme.me/wp-content/uploads/2015/11/slide-2.jpg" alt="">
+        </div>
+        <div class="slider__text">
+          <h1 class="flash">HELLO <span>STRANGER</span> • WE ARE <span>BETHEME</span></h1>
+          <p class="">BeOnePage, a WordPress theme at the heart of the beauty</p>
+          <div class="slider__button">
+            <a href="#">DOWNLOAD NOW</a>
+          </div>
+        </div>
+      </div>
+      <div class="slider__item swiper-slide">
+        <div class="parallax-img">
+          <img src="https://beonepage.betheme.me/wp-content/uploads/2015/11/slide-3.jpg" alt="">
+        </div>
+        <div class="slider__text">
+          <h1>YOU WILL <span>LOVE</span> BEONEPAGE</h1>
+          <p>We help you get things done</p>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="slide-numbers">
+      <div class="slide-number-current"></div>
+      <span>/</span>
+      <div class="slide-number-total"></div>
+    </div> -->
+    <div class="swiper-pagination-fraction"></div>
+    <button class="slide-arrow arrow-prev"></button>
+    <button class="slide-arrow arrow-next"></button>
+  </div>
 
+  <div class="container" style="height: 100vh;"></div>
 
-  
+  <div class="window-btn">
+    <div class="slider__button fadeInUp">
+      <a href="#">BUY NOW</a>
+    </div>
+  </div>
+        
   <!-- Fonts -->
   <script src="node_modules/@fortawesome/fontawesome-free/js/all.js"></script>
-  <!-- WOWjs -->
+  <!-- WOW -->
   <script src="node_modules/wowjs/dist/wow.min.js"></script>
   <!-- Jquery -->
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
-  <!-- Paralaxjs -->
+  <!-- Paralax -->
   <script src="node_modules/jquery-parallax.js/parallax.js"></script>
-  <!-- Scriptjs -->
+  <!-- Swiper -->
+  <script src="node_modules/swiper/swiper-bundle.min.js"></script>
+  <!-- Script -->
   <script src="js/script.js"></script>
-  <!--https://beonepage.betheme.me/wp-content/uploads/2015/11/slide-1.jpg-->
-  <!--https://beonepage.betheme.me/wp-content/uploads/2015/11/slide-2.jpg-->
-  <!--https://beonepage.betheme.me/wp-content/uploads/2015/11/slide-3.jpg-->
+
   <!-- https://beonepage.betheme.me/wp-content/uploads/2015/09/fancy-items-scene-generator-720x480.jpg -->
   <!-- https://beonepage.betheme.me/wp-content/uploads/2015/09/i-am-creator-1-925x695.jpeg -->
   <!-- https://beonepage.betheme.me/wp-content/uploads/2015/09/i-am-creator-4-720x480.jpeg -->

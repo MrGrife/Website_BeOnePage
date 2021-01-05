@@ -1,7 +1,18 @@
+@import '../node_modules/animate.css/animate.min.css';
+@import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
+@import '../node_modules/slick-carousel/slick/slick.css';
+@import '../node_modules/swiper/swiper-bundle.css';
+
 @font-face {
     font-family: 'Raleway-Regular';
 
 	src: url("fonts/Raleway-Regular.ttf")
+}
+
+@font-face {
+    font-family: 'Dosis-Regular';
+
+	src: url("fonts/Dosis-Regular.otf")
 }
 
 *,
@@ -12,6 +23,11 @@
     padding: 0;
 }
 
+body {
+    background-color: #18191b;
+    font-family: 'Raleway-Regular';
+}
+
 li {
     list-style: none;
 }
@@ -20,15 +36,42 @@ a {
     text-decoration: none;
 }
 
-/* ----------- header ----------- */
-.container {
-    height: 200vh;
+*::selection {
+    background: #D19E06;
 }
+
+:root {
+    --animate-duration: 3s;
+}
+
+/* ----------- ProgressBar ----------- */
+
+.progress__bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    transition: 0.3s all ease-out;
+    background: #FFCC00;
+}
+.progress__bar:after {
+    content: "";
+    display: block;
+    width: 20px;
+    position: absolute;
+    right: 0;
+    box-shadow: 0px 0px 9px 1px #FFCC00;
+}
+
+/* ----------- header ----------- */
+
 header {
     position: fixed;
-    background: #18191B;
+    background: transparent;
+    transition: 0.3s all;
     width: 100%;
-    font-family: 'Raleway-Regular';
+    z-index: 100000;
 }
 
 .active__window {
@@ -37,7 +80,7 @@ header {
 
 .header__content {
     display: flex;
-    width: 95%;
+    width: 98%;
     margin: 0 auto;
     justify-content: space-between;
     align-items: center;
@@ -61,11 +104,7 @@ header {
 
 .list__header {
     display: flex;
-    transition: .3s all;
-}
-
-.link {
-    transition: .3s all;
+    
 }
 
 .nav__item {
@@ -86,6 +125,7 @@ header {
     letter-spacing: 2px;
     color: #fff;
     padding: 30px 0px 30px 20px;
+    transition: .3s all;
 }
 
 .link:after {
@@ -98,6 +138,10 @@ header {
     border: 1px solid #fff;
     margin-left: 20px;
     transition: .3s all;
+}
+
+.link__active {
+    padding: 25px 0 25px 20px;
 }
 
 .nav__item:nth-last-child(1) .link:after {
@@ -140,6 +184,7 @@ header {
 .sub-menu li a {
     display: block;
     color: #fff;
+    transition: .4s all;
     padding: 15px 0 15px 15px;
 }
 
@@ -217,6 +262,212 @@ header {
 }
 
 
+/* ----------- Slider ----------- */
+
+.slider {
+    width: 100%;
+    height: 100vh;
+    cursor: grab;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* moving */
+.slide__wrap {
+    position: relative;
+    display: flex;
+    width: 300vw;
+    transition: .3s all;
+}
+/* ------ */
+
+.slider__item {
+    width: 100%;
+    height: 100vh;
+}
+
+.slider__item img {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.slider__text {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    text-align: center;
+    pointer-events: none;
+    font-family: 'Dosis-Regular';
+}
+
+.slider__text h1 {
+    color: #fff;
+    font-size: 45px;
+    font-weight: 100;
+    letter-spacing: 12px;
+}
+
+.slider__text p {
+    color: #fff;
+    font-size: 17px;
+    margin-top: 35px;
+    letter-spacing: 3px;
+}
+
+.slider__text h1 span {
+    color:#FECB00;
+}
+
+
+.slider__button {
+    pointer-events: auto;
+    margin-top: 50px;
+    font-size: 14px;
+    font-family: 'Dosis-Regular';
+}
+.slider__button a{
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    padding: 10px 25px;
+    border-radius: 20px;
+    letter-spacing: 2px;
+    transition: 0.3s all;
+}
+.slider__button a:hover {
+    color: rgba(0, 0, 0, 1);
+    border-radius: 0;
+    background-color: #fff;
+}
+
+
+.window-btn{
+    position: fixed;
+    left: 20px;
+    bottom: 30px;
+    font-size: 13px;
+    z-index: 10000;
+}
+
+.window-btn .slider__button a {
+    color: rgba(255, 255, 255, .9);
+}
+.window-btn .slider__button a:hover {
+    color: rgba(0, 0, 0, 1);
+}
+
+
+/*  SlideArrows  */
+
+.slide-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 0;
+    background-color: rgba(0,0,0,.3);
+    outline: none;
+    border: none;
+    cursor: pointer;
+    padding: 20px;
+    transition: 0.4s all;
+    z-index: 1000;
+}
+.slide-arrow:hover {
+    background-color: rgba(0,0,0,.6);
+}
+
+.arrow-prev {
+    left: 0;
+}
+.arrow-prev:after {
+    content: "";
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-top: 5px solid rgb(255,255,255, .4);
+    border-right: 5px solid rgb(255,255,255, .4);
+    transform: rotate(225deg);
+    transition: 0.4s all;
+}
+.arrow-prev:hover:after{
+    border-color:rgb(255,255,255, .8);
+}
+
+.arrow-next {
+    right: 0;
+}
+.arrow-next:after {
+    content: "";
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-top: 6px solid rgb(255,255,255, .4);
+    border-right: 6px solid rgb(255,255,255, .4);
+    transform: rotate(45deg);
+    transition: 0.4s all;
+}
+.arrow-next:hover:after{
+    border-color:rgb(255,255,255, .8);
+}
+/* SlideNumbers */
+
+/* .slide-numbers {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    pointer-events: none;
+    display: flex;
+    color: #fff;
+    font-size: 20px;
+    z-index: 1;
+    font-family: 'Raleway-Regular';
+}
+.slide-number-current {
+    position: relative;
+    bottom: 5px;
+    
+}
+.slide-number span {
+    font-size: 30px;
+    font-weight: 500;
+}
+.slide-number-total {
+    position: relative;
+    top: 10px;
+} */
+
+.swiper-pagination-fraction {
+    position: absolute;
+    pointer-events: none;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 20px;
+    bottom: 20px;
+    color: #fff;
+    font-size: 20px;
+    z-index: 1;
+    
+}
+
+.swiper-pagination-fraction span {
+    font-size: 30px;
+}
+
+.swiper-pagination-current {
+    position: relative;
+    bottom: 5px;
+}
+.swiper-pagination-total {
+    position: relative;
+    top: 10px;
+}
+
+
 /*----------- Adaptive ----------- */
 
 @media (max-width: 1300px) {
@@ -229,6 +480,13 @@ header {
 }
 
 @media (max-width: 1100px) {
+
+    /* ----------- Header ----------- */
+
+    header {
+        background: #18191B;
+    }
+
     /* ----------- BurgerMenu media ----------- */
 
     .burger__menu {
@@ -305,5 +563,28 @@ header {
     
     .shop {
         margin-bottom: 75px;
+    }
+
+    /* ----------- ProgressBar ----------- */
+
+    .progress__bar {
+        display: none;
+    }
+}
+
+@media (max-width: 950px) {
+    .slider__text h1 {
+        font-size: 30px;
+    }
+    
+}
+
+@media (max-width: 770px) {
+    .slider__text h1 {
+        font-size: 20px;
+        letter-spacing: 8px;
+    }
+    .slider__text p {
+        font-size: 14px;
     }
 }
