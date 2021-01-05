@@ -132,19 +132,24 @@ document.addEventListener("DOMContentLoaded", () => {
                         '<span>/</span>' +
                         '<div class="' + totalClass + '"></div>';
             }
+        },
+        on: {
+            transitionEnd: function () {
+                chekSlidesActive();
+            }
         }
     });
     
-    const slides = document.querySelectorAll(".slider__item"),
-        slidesText = document.querySelectorAll(".slider__text"),
-        slideActive = document.querySelector(".swiper-slide-active");
+    const slidesText = document.querySelectorAll(".slider__text");
 
     function chekSlidesActive () {
-        slides.forEach(slide => {
-            if (slide.classList.contains("swiper-slide-active")) {
-                console.log("hi");
+        slidesText.forEach(slide => {
+            if (slide.parentElement.classList.contains("swiper-slide-active")) {
+                slide.style.display = "flex";
+            } else {
+                slide.style.display = "none";
             }
         });
     }
-    chekSlidesActive();
+    
 });
