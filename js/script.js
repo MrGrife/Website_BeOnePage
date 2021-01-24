@@ -1,6 +1,9 @@
 "use strict";
 
-new WOW().init();
+const wow = new WOW({
+    offset: 0
+});
+wow.init();
 
 document.addEventListener("DOMContentLoaded", () => {
     const header = document.querySelector("header"),
@@ -34,6 +37,16 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector(".progress__bar").style.width = scrolled + '%';
     }
     window.addEventListener("scroll", progressBar);
+
+
+    /* Scroll window */
+
+    const scrollbtn = document.querySelector(".skip-slider"),
+        secondSection = document.querySelector(".about__betheme");
+
+    scrollbtn.addEventListener("click", () => {
+        secondSection.scrollIntoView({block: "start",behavior: 'smooth'});
+    });
    
 
 /* ----------- Burger menu and media nav ----------- */
@@ -56,67 +69,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let scrollPosition = 0,
     parallaxImg = document.querySelectorAll(".parallax-img");
-    document.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function() {
         scrollPosition = window.pageYOffset;
         parallaxImg.forEach(item => {
-            item.style.transform = `translateY(${scrollPosition * 10 / 40}px)`;
+            item.style.transform = `translateY(${scrollPosition * 10 / 35}px)`;
         });
     });
 
 
     /* ----------- Slider ----------- */
 
-    // const slider = document.querySelector(".slider"),
-    //     sliderWrap = document.querySelector(".slide__wrap"),
-    //     slides = document.querySelectorAll(".slider__item"),
-    //     slideNumberCurrent = document.querySelector(".slide-number-current"),
-    //     slideNumberTotal = document.querySelector(".slide-number-total"),
-    //     slideArrowPrev = document.querySelector(".arrow-prev"),
-    //     slideArrowNext = document.querySelector(".arrow-next");
-
-    //     let slideIndex = 1,
-    //         offset = 0;
-
-    // slider.addEventListener("mousedown", () => {
-    //     slider.style.cursor = "grabbing";
-    // });
-    // slider.addEventListener("mouseup", () => {
-    //     slider.style.cursor = "grab";
-    // });
-
-
-    // slideArrowNext.addEventListener("click", () => {
-    //     slideIndex++;
-    //     if (slideIndex > slides.length) {
-    //         slideIndex = slides.length;
-    //     } else {
-    //         offset += 100;
-    //     }
-
-    //     sliderWrap.style.transform = `translateX(-${offset}vw)`;
-    //     showNumberSlide();
-    // });
-
-    // slideArrowPrev.addEventListener("click", () => {
-    //     slideIndex--;
-    //     if (slideIndex == slides.length - slides.length) {
-    //         slideIndex = 1;
-    //     } else {
-    //         offset -= 100;
-    //     }
-
-    //     sliderWrap.style.transform = `translateX(-${offset}vw)`;
-    //     showNumberSlide();
-    // });
-
-    // function showNumberSlide () {
-    //     slideNumberCurrent.textContent = slideIndex;
-    //     slideNumberTotal.textContent = slides.length;
-    // }
-    // showNumberSlide();
-
-
-    /* ----------- Slider ----------- */
+    const slider = document.querySelector(".slider");
 
    new Swiper(".slider", {
         navigation: {
@@ -136,6 +99,14 @@ document.addEventListener("DOMContentLoaded", () => {
         on: {
             transitionEnd: function () {
                 chekSlidesActive();
+            },
+
+            touchStart: function () {
+                slider.style.cursor = "grabbing";
+            },
+
+            touchEnd: function () {
+                slider.style.cursor = "grab";
             }
         }
     });
@@ -151,5 +122,23 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+    
+    /* Hide elements */
+
+    window.addEventListener("scroll", () => {
+        slidesText.forEach(slide => {
+            if (pageYOffset > 0) {
+                slide.style.opacity = `${(500 - pageYOffset) * 0.002}`;
+            }
+        });
+        if (pageYOffset > 0) {
+            scrollbtn.style.cssText = `bottom: ${(40 + pageYOffset)}px; opacity: ${(300 - pageYOffset) * 0.00333};`;
+        } else {
+            scrollbtn.style.cssText = `bottom: 40px; opacity: 1;`;
+        }
+    });
+
+    /* ----------- SkillBarAnimation ----------- */
+
     
 });

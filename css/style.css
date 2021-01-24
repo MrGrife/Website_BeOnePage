@@ -12,7 +12,13 @@
 @font-face {
     font-family: 'Dosis-Regular';
 
-	src: url("fonts/Dosis-Regular.otf")
+	src: url("fonts/Dosis-Regular.ttf")
+}
+
+@font-face {
+    font-family: 'Dosis-Medium';
+
+	src: url("fonts/Dosis-Medium.ttf")
 }
 
 *,
@@ -26,6 +32,7 @@
 body {
     background-color: #18191b;
     font-family: 'Raleway-Regular';
+    overflow-x:hidden;
 }
 
 li {
@@ -40,7 +47,25 @@ a {
     background: #D19E06;
 }
 
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
 
+section {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    text-align: center;
+    color: #fff;
+    font-family: 'Dosis-Regular';
+    z-index: 1;
+    padding: 100px 0 100px 0;
+}
 
 /* ----------- ProgressBar ----------- */
 
@@ -74,6 +99,7 @@ header {
 
 .active__window {
     background: #18191B;
+    border-bottom: 1px solid #333333;
 }
 
 .header__content {
@@ -263,6 +289,7 @@ header {
 /* ----------- Slider ----------- */
 
 .slider {
+    position: relative;
     width: 100%;
     height: 100vh;
     cursor: grab;
@@ -270,14 +297,21 @@ header {
     z-index: 1;
 }
 
-/* moving */
+.slider:hover .swiper-pagination-fraction{
+    opacity: 1;
+}
+
+.swiper-pagination-fraction {
+    opacity: 0;
+    transition: .3s all;
+}
+
 .slide__wrap {
     position: relative;
     display: flex;
     width: 300vw;
     transition: .3s all;
 }
-/* ------ */
 
 .slider__item {
     width: 100%;
@@ -318,7 +352,7 @@ header {
     letter-spacing: 3px;
 }
 
-.slider__text h1 span {
+.change-color {
     color:#FECB00;
 }
 
@@ -328,6 +362,7 @@ header {
     margin-top: 50px;
     font-size: 14px;
     font-family: 'Dosis-Regular';
+    z-index: 1;
 }
 .slider__button a{
     color: #fff;
@@ -412,32 +447,6 @@ header {
 .arrow-next:hover:after{
     border-color:rgb(255,255,255, .8);
 }
-/* SlideNumbers */
-
-/* .slide-numbers {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    pointer-events: none;
-    display: flex;
-    color: #fff;
-    font-size: 20px;
-    z-index: 1;
-    font-family: 'Raleway-Regular';
-}
-.slide-number-current {
-    position: relative;
-    bottom: 5px;
-    
-}
-.slide-number span {
-    font-size: 30px;
-    font-weight: 500;
-}
-.slide-number-total {
-    position: relative;
-    top: 10px;
-} */
 
 .swiper-pagination-fraction {
     position: absolute;
@@ -465,6 +474,278 @@ header {
     top: 10px;
 }
 
+/* windowScroll */
+
+.skip-slider {
+    position: absolute;
+    bottom: 40px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index: 1;
+}
+
+.skip-slider span {
+    display: flex;
+    justify-content: center;
+    width: 25px;
+    height: 40px;
+    border: 2px solid #fff;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.skip-slider span::after {
+    content: "";
+    margin-left: 1px;
+    width: 2px;
+    height: 6px;
+    background: #fff;
+    animation: ScrollFade 1s infinite ease-out;
+}
+
+@keyframes ScrollFade {
+    0% {
+        margin-top: 5px;
+        opacity: 1;
+    }
+    100% {
+        margin-top: 30px;
+        opacity: 0;
+    }
+}
+
+
+/* ----------- AboutBetheme ----------- */
+
+.logo__name h2{
+    font-weight: 100;
+    letter-spacing: 2px;
+    font-size: 2em;
+}
+
+.logo__name p {
+    font-family: 'Raleway-Regular';
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+/* Circle */
+
+.circle {
+    position: relative;
+    width: 580px;
+    font-size: 6px;
+    color:#FECB00;
+    margin-top: 30px;
+}
+
+.circle::after {
+    content: "";
+    position: absolute;
+    width: 275px;
+    top: 4px;
+    right: 0;
+    height: 1px;
+    background: #888888;
+}
+
+.circle::before {
+    content: "";
+    position: absolute;
+    width: 275px;
+    top: 4px;
+    left: 0;
+    height: 1px;
+    background: #888888;
+}
+
+/* Content */
+
+.content {
+    max-width: 1200px;
+    font-family: 'Dosis-Medium';
+    font-weight: 500;
+    color: #D5D8DB;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.about__betheme-content {
+    display: flex;
+    width: 100%;
+    font-size: 20px;
+    margin-top: 60px;
+}
+
+.about-us {
+    text-align: left;
+    width: 50%;
+    line-height: 1.5;
+    margin-left: 15px;
+    padding-right: 33px;
+}
+
+.about-us blockquote {
+    padding: 10px 15px;
+    border-left: 5px solid #FECB00;
+    line-height: 1;
+}
+
+.about-us p{
+    font-size: 15px;
+    margin-top: 25px;
+}
+
+/* Statistic */
+
+.statistic {
+    width: 50%;
+    font-family: 'Dosis-Medium';
+    text-align: left;
+}
+
+.skill-bar {
+    margin-bottom: 30px;
+}
+
+.skill-bar h4 {
+    font-weight: 100;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    font-size: 19px;
+}
+
+.line-bar {
+    width: 100%;
+    height: 2px;
+    background: #878787;
+}
+
+.line-active {
+    position: relative;
+    height: 100%;
+    width: 0%;
+    background: #FECB00;
+}
+
+.first {
+    animation: firstLine 3s forwards;
+}
+.second {
+    animation: secondLine 3s forwards;
+}
+.third {
+    animation: thirdLine 3s forwards;
+}
+@keyframes firstLine {
+    0% {
+        width: 0%;
+    } 100% {
+        width: 80%;
+    }
+}
+@keyframes secondLine {
+    0% {
+        width: 0%;
+    } 100% {
+        width: 95%;
+    }
+}
+@keyframes thirdLine {
+    0% {
+        width: 0%;
+    } 100% {
+        width: 85%;
+    }
+}
+
+.bar-total-time {
+    position: absolute;
+    font-size: 14px;
+    right: 0;
+    font-weight: 900;
+    bottom: -15px;
+    background: #272727;
+    padding: 10px;
+    font-family: 'Raleway-Regular';
+}
+
+/* ----------- OurServices ----------- */
+
+.our__services {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.triagle {
+    position: absolute;
+    top: 0;
+    height: 30px;
+    border-left: 25vw solid transparent;
+    border-right: 25vw solid transparent;
+    border-top: 30px solid #18191b;
+}
+
+.our__services .circle::after,
+.our__services .circle::before {
+    background: #FECB00;
+}
+
+/* ----------- OurServicesContent ----------- */
+
+.row {
+    margin-top: 40px;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.row-content {
+    padding: 0 30px 30px 30px;
+    margin-top: 30px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.row-content h3{
+    font-weight: 100;
+    letter-spacing: 3px;
+    margin: 25px 0 15px 0;
+}
+
+.row-content p {
+    opacity: 0.8;
+    transition: .5s all;
+}
+
+.row-icon {
+    width: 96px;
+    height: 96px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    border: 2px solid #fff;
+    padding: 20px;
+    border-radius: 50%;
+    transition: 1s all;
+}
+
+.row-content:hover .row-icon{
+    background: #FECB00;
+    transform: rotate(360deg);
+    border: 2px solid#FECB00;
+}
+
+.row-content:hover .service-content{
+    opacity: 1;
+}
 
 /*----------- Adaptive ----------- */
 
@@ -563,11 +844,14 @@ header {
         margin-bottom: 75px;
     }
 
-    /* ----------- ProgressBar ----------- */
+    /* ----------- OurServices ----------- */
 
-    .progress__bar {
-        display: none;
+    .triagle {
+        border-left: 50vw solid transparent;
+        border-right: 50vw solid transparent;
+        border-top: 20px solid #18191b;
     }
+    
 }
 
 @media (max-width: 950px) {
@@ -584,5 +868,81 @@ header {
     }
     .slider__text p {
         font-size: 14px;
+    }
+
+    .slide-arrow {
+        display: none;
+    }
+
+    /* SkipSlider */
+    
+    .skip-slider {
+        display: none;
+    }
+
+    /* ----------- AboutBetheme ----------- */
+
+    .content {
+        width: 100%;
+        padding: 0 15px;
+    }
+
+    .about__betheme-content {
+        display: block;
+        padding: 0;
+    }
+
+    .about-us {
+        font-family: 'Dosis-Medium';
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .about-us p {
+        font-size: 15px;
+        margin: 25px 0;
+    }
+
+    .statistic {
+        width: 100%;
+        font-family: 'Dosis-Medium';
+        text-align: left;
+    }
+
+    /* Circle */
+
+    .circle {
+        width: 435px;
+    }
+    
+    .circle::after,
+    .circle::before{
+        width: 200px;
+    }
+
+    /* ----------- ProgressBar ----------- */
+
+    .progress__bar {
+        display: none;
+    }
+
+    /* ----------- OurServicesContent ----------- */
+    
+    .row {
+        display: block;
+    }
+
+    
+}
+
+@media (max-width: 480px) {
+    .circle {
+        width: 330px;
+        font-size: 6px;
+    }
+    
+    .circle::after,
+    .circle::before{
+        width: 150px;
     }
 }
