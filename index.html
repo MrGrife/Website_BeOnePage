@@ -423,7 +423,7 @@
     <div class="process-flow-slider">
       <div class="process-items-slider">
         <div class="process-flow-icons-row">
-        <div class="process-flow-icon progress-bar-icons-active">
+        <div class="process-flow-icon">
           <i class="fas fa-coffee"></i>
           <p>discuss</p>
         </div>
@@ -507,26 +507,27 @@
         <form action="#">
           <div class="first-stage">
             <div class="name">
-              <input type="text" autocomplete="on" name="name" placeholder="Name" required="This field is required.">
+              <input class="name _req" type="text" autocomplete="on" name="name" placeholder="Name">
             </div>
             <div class="email">
-              <input type="email" autocomplete="on" name="email" placeholder="Email" required="This field is required.">
+              <input class="email _req" type="email" autocomplete="on" name="email" placeholder="Email">
             </div>
             <div class="number delete-spin">
               <input type="number" autocomplete="on" name="number" placeholder="Phone">
             </div>
           </div>
           <div class="subject">
-            <input type="text" autocomplete="on" name="subject" placeholder="Subject" required="This field is required.">
+            <input class="_req" type="text" autocomplete="on" name="subject" placeholder="Subject">
           </div>
           <div class="message">
-            <textarea name="massage" cols="30" rows="10" placeholder="Message"></textarea>
+            <textarea class="_req" name="massage" placeholder="Message"></textarea>
           </div>
           <div class="check-on-real-human delete-spin">
-            <input type="number" autocomplete="on" placeholder="" required="This field is required.">
+            <input class="math _req" type="number">
           </div>
           <div class="checkbox">
-            <input type="checkbox">
+            <input class="_req" type="checkbox" name="checkbox"
+            required>
             <p>By filling out this form and clicking submit, you agree to our Term and Condition.</p>
           </div>
           <button type="submit" name="send">SEND</button>
@@ -535,15 +536,300 @@
     </div>
   </section>
 
+  <footer>
+    <div class="wrapper_map">
+      <div class="map__icon wow fadeIn">
+        <i class="fas fa-street-view"></i>
+        <div class="square"></div>
+        <div class="rectangle"></div>
+      </div>
+      <div id="map">
+      </div>
+    </div>
+    <div class="end">
+      <div class="end__logo">
+        <h1>BeOnePage</h1>
+      </div>
+      <div class="menu-social wow zoomInUp">
+        <div class="menu-social-item-wrap">
+          <div class="nameOfItem fadeIn">Twitter</div>
+          <div class="menu-social__item light-blue">
+            <a href="#">
+              <i class="fab fa-twitter-square"></i>
+              <i class="fab fa-twitter-square"></i>
+            </a>
+          </div>
+        </div>
+          <div class="menu-social-item-wrap">
+            <div class="nameOfItem fadeIn">Facebook</div>
+          <div class="menu-social__item blue">
+            <a href="#">
+              <i class="fab fa-facebook-square"></i>
+              <i class="fab fa-facebook-square"></i>
+            </a>
+          </div>
+          </div>
+          <div class="menu-social-item-wrap">
+            <div class="nameOfItem fadeIn">Google+</div>
+          <div class="menu-social__item orange">
+            <a href="#">
+              <i class="fab fa-google-plus-square"></i>
+              <i class="fab fa-google-plus-square"></i>
+            </a>
+          </div>
+          </div>
+          <div class="menu-social-item-wrap">
+            <div class="nameOfItem fadeIn">YouTube</div>
+          <div class="menu-social__item red">
+            <a href="#">
+              <i class="fab fa-youtube-square"></i>
+              <i class="fab fa-youtube-square"></i>
+            </a>
+          </div>
+          </div>
+          <div class="menu-social-item-wrap">
+            <div class="nameOfItem fadeIn">Vimeo</div>
+          <div class="menu-social__item light-blue-second">
+            <a href="#">
+              <i class="fab fa-vimeo"></i>
+              <i class="fab fa-vimeo"></i>
+            </a>
+          </div>
+          </div>
+          <div class="menu-social-item-wrap">
+            <div class="nameOfItem fadeIn">Dribbble</div>
+          <div class="menu-social__item">
+            <a href="#">
+              <i class="fas fa-heart"></i>
+              <i class="fas fa-heart"></i>
+            </a>
+          </div>
+          </div>
+      </div>
+      <div class="site-info">
+        <p>
+          Copyrights © 2016. All Rights Reserved. Powered by <a href="#">BeTheme</a> .</p>
+      </div>
+    </div>
+  </footer>
+
 
   <div class="window-btn">
-    <div class="slider__button fadeInUp">
+    <div class="slider__button notS fadeInUp">
       <a href="#">BUY NOW</a>
     </div>
   </div>
-        
-  
 
+
+  <!-- APIGoogleMap -->
+  <script>
+    let map;
+
+    function initMap() {
+      const myLatLng = { lat: 37.42206735367938, lng: -122.08409054110797 };
+
+      const map = new google.maps.Map(document.getElementById("map"), {
+          center: myLatLng,
+          zoom: 15,
+          styles: [
+            {
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#f5f5f5"
+                }
+              ]
+            },
+            {
+              "elementType": "labels.icon",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#616161"
+                }
+              ]
+            },
+            {
+              "elementType": "labels.text.stroke",
+              "stylers": [
+                {
+                  "color": "#f5f5f5"
+                }
+              ]
+            },
+            {
+              "featureType": "administrative.land_parcel",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#bdbdbd"
+                }
+              ]
+            },
+            {
+              "featureType": "poi",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#eeeeee"
+                }
+              ]
+            },
+            {
+              "featureType": "poi",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#757575"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#e5e5e5"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#9e9e9e"
+                }
+              ]
+            },
+            {
+              "featureType": "road",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#ffffff"
+                }
+              ]
+            },
+            {
+              "featureType": "road.arterial",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#757575"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#dadada"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#616161"
+                }
+              ]
+            },
+            {
+              "featureType": "road.local",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#9e9e9e"
+                }
+              ]
+            },
+            {
+              "featureType": "transit.line",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#e5e5e5"
+                }
+              ]
+            },
+            {
+              "featureType": "transit.station",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#eeeeee"
+                }
+              ]
+            },
+            {
+              "featureType": "water",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#c9c9c9"
+                }
+              ]
+            },
+            {
+              "featureType": "water",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#9e9e9e"
+                }
+              ]
+            }
+          ]
+      });
+
+      const image = {
+        url: "img/google marker.png",
+        scaledSize: new google.maps.Size(50, 50),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(40, 40),
+      };
+      
+      const marker = new google.maps.Marker({
+        position: myLatLng,
+        map,
+        icon: image,
+        title: "",
+      });
+
+      const contentString =
+      "<h4>Гуглплекс</h4>" +
+      "<p>1600 Amphitheatre Pkwy</p>" +
+      "<p>Mountain View, CA 94043</p>" +
+      '<a class="google-link" href="https://www.google.com/maps?ll=37.424217,-122.084474&z=15&t=m&hl=ru-RU&gl=US&mapclient=apiv3&cid=7793879817120868320">Показать на Google Картах</a>';
+
+      const infowindow = new google.maps.InfoWindow({
+        content: contentString,
+      });
+      marker.addListener("click", () => {
+        infowindow.open(map, marker);
+      });
+    }
+  
+    const wrapperMap = document.querySelector(".wrapper_map"),
+      mapIcon = document.querySelector(".map__icon i");
+
+      mapIcon.addEventListener("click", () => {
+        wrapperMap.classList.toggle("showMap");
+      })
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPUYHB_3-DvdFAL7JLXa6uDJ5FvcloCdM&callback=initMap&libraries=&v=weekly"
+  async></script>
   <!-- WOW -->
   <script src="node_modules/wowjs/dist/wow.min.js"></script>
   <!-- Jquery -->

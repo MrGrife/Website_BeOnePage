@@ -1,12 +1,5 @@
 {
   "requests": [
-    {
-      "name": "Maksim",
-      "email": "timeshin0485@mail.ru",
-      "number": "375445680801",
-      "subject": "css",
-      "massage": "Hello my name is Maksim!",
-      "id": 1
-    }
+    
   ]
 }

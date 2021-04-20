@@ -193,6 +193,67 @@ document.addEventListener("DOMContentLoaded", () => {
              scrollbtn.style.cssText = `bottom: 40px; opacity: 1;`;
          }
      });
+
+    /* ----------- Process flow slider ----------- */
+
+
+    const dots = document.querySelectorAll(".process-flow-icon"),
+     sliderProgressBar = document.querySelector(".progress-bar"),
+     slideContent = document.querySelectorAll(".slide-content"),
+     slideIconsText = document.querySelectorAll(".process-flow-icon p");
+
+    function addActiveClass(i = 0) {
+        dots[i].classList.add("progress-bar-icons-active");
+    }
+    addActiveClass();
+
+    function removeActiveClass () {
+        dots.forEach(item => {
+            item.classList.remove("progress-bar-icons-active");
+        });
+    }
+
+    function hideIconText() {
+        slideIconsText.forEach(text => {
+            text.style.opacity = "0";
+        })
+    }
+    function showIconText(i = 0) {
+        slideIconsText[i].style.opacity = "1";
+    }
+    showIconText();
+
+    function slide(i) {
+        slideContent.forEach(slide => {
+            slide.style.transform = `translate(-${i * 100}%)`;
+        });
+    }
+    function progressBarSlider(i) {
+        sliderProgressBar.style.width = `${i * 33.33333}%`;
+    }
+
+    dots.forEach((dot, i) => {
+        dot.addEventListener("click", () => {
+            removeActiveClass();
+            addActiveClass(i);
+            slide(i);
+            progressBarSlider(i);
+            if (window.innerWidth <= 480) {
+                hideIconText();
+                showIconText(i);
+            }
+        });
+    });
+    
+
+
+
+
+
+
+
+
+
     
     /* ----------- Parallax and navigation ----------- */
 
@@ -271,11 +332,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ----------- Forms(POST DATA) ----------- */
 
-    const forms = document.querySelectorAll("form");
+    const form = document.querySelector("form"),
+        parentPrevModal = document.querySelector(".send-data");
 
-    forms.forEach(item => {
-        bindPostData(item);
-    });
+    bindPostData(form);
 
     const postData = async (url, data) => {
         let res = await fetch(url, {
@@ -285,19 +345,126 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             body: data
         });
-        return await JSON.parse(res);
+        return await res.json();
+    };
+
+    const messages = {
+        success: "✓ Thanks you. The Mailman is on his way!",
+        loading: "img/spinner.svg",
+        failure: "✘ Verification error. Try again!"
     };
 
     function bindPostData (form) {
         form.addEventListener("submit", function (e) {
             e.preventDefault();
 
-            const formData = new FormData(form);
+            const error = formValidate();
+            if (error === 0) {
+                
+                const statusMessage = document.createElement("img");
+                    statusMessage.src = messages.loading;
+                    statusMessage.style.cssText = `
+                        position: absolute;
+                        top: 40%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        opacity: 1;
+                    `;
+                parentPrevModal.append(statusMessage);
 
-            const json = JSON.stringify(Object.fromEntries(formData));
-            
-            postData("http://localhost:3000/requests", json);
+                const formData = new FormData(form);
+                const json = JSON.stringify(Object.fromEntries(formData));
+                postData("http://localhost:3000/requests", json)
+                .then(() => {
+                    showThanksModal(messages.success);
+                    statusMessage.remove();
+                })
+                .catch(() => {
+                    showThanksModal(messages.failure);
+                    statusMessage.remove();
+                })
+                .finally(() => {
+                    form.reset();
+                });
+            }
         });
     }
+
+    function showThanksModal(message) {
+        const prevModalDialog = document.createElement("div");
+
+        prevModalDialog.classList.add("thanks__message");
+        prevModalDialog.innerText = message;
+        parentPrevModal.append(prevModalDialog);
+
+        setTimeout(() => {
+            prevModalDialog.classList.add("hide");
+        }, 4500);
+    }
+
+    function formValidate() {
+        let error = 0;
+        let formReq = document.querySelectorAll("._req");
+
+        formReq.forEach(input => {
+            input.addEventListener("input", () => {
+                formRemoveError(input);
+                if (input.classList.contains('email')) {
+                    if (emailTest(input)) {
+                        formAddError(input);
+                    }
+                } else if (input.classList.contains('math')) {
+                    if (input.value != firstNumber + secondNumber) {
+                        formAddError(input);
+                    }
+                } else {
+                    if (input.value === "") {
+                        formAddError(input);
+                    }
+                }
+            });
+            formRemoveError(input);
+            if (input.classList.contains('email')) {
+                if (emailTest(input)) {
+                    formAddError(input);
+                    error++;
+                }
+            } else if (input.classList.contains('math')) {
+                if (input.value != firstNumber + secondNumber) {
+                    formAddError(input);
+                    error++;
+                }
+            } else {
+                if (input.value === "") {
+                    formAddError(input);
+                    error++;
+                }
+            }
+        });
+        return error;
+    }
+
+    function formAddError(input) {
+        input.classList.add("error");
+    }
+    function formRemoveError(input) {
+        input.classList.remove("error");
+    }
+    function emailTest(input) {
+        return !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,8})+$/.test(input.value);
+    }
+
+
+    /* Random numbers */
+
+    const checkedInput = document.querySelector(".check-on-real-human input"),
+        firstNumber = Math.floor(Math.random() * 21) + 1,
+        secondNumber = Math.floor(Math.random() * 21) + 1;
+
+    function randomNumbers () {
+        return `${firstNumber} + ${secondNumber} = ?`;
+    }
+
+    checkedInput.setAttribute("placeholder", randomNumbers());
 
 });
